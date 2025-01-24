@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Paleta de Cores</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Gerador de Paleta de Cores</h1>
+    <input
+      type="text"
+      id="color-input"
+      placeholder="Digite códigos hexadecimais separados por vírgula"
+    />
+    <button onclick="gerarPaleta()">Gerar Paleta</button>
+    <button onclick="baixarImagem()">Baixar Imagem</button>
+    <p id="mensagem"></p>
+    <canvas id="canvas" width="512" height="512"></canvas>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
