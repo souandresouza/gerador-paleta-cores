@@ -1,17 +1,19 @@
 document.getElementById("color-input").addEventListener("input", autoComplete);
 
 function autoComplete(event) {
-  const input = event.target.value;
-  const partes = input.split(",");
-  const atualizado = partes.map((parte) => {
-    parte = parte.trim();
-    if (parte && !parte.startsWith("#")) {
-      parte = "#" + parte;
-    }
-    return parte;
-  }).join(", ");
+  let input = event.target.value;
+  
+  // Adiciona '#' se o usuário começar a digitar sem ele
+  if (input.length === 1 && input !== "#") {
+    input = "#" + input;
+  }
 
-  event.target.value = atualizado;
+  // Adiciona vírgula e espaço após cada 7 caracteres (código hex completo)
+  if (input.length > 1 && input.length % 8 === 0) {
+    input += ", ";
+  }
+
+  event.target.value = input;
 }
 
 const canvas = document.getElementById("canvas");
@@ -25,7 +27,7 @@ function gerarPaleta() {
 
   // Pega os valores digitados
   const input = document.getElementById("color-input").value;
-  const cores = input.split(",").map((cor) => cor.trim());
+  const cores = input.split(",").map((cor) => cor.trim()).filter(Boolean);
 
   // Verifica se há cores válidas
   if (cores.length === 0 || cores[0] === "") {
