@@ -1,28 +1,3 @@
-document.getElementById("color-input").addEventListener("input", autoComplete);
-
-function autoComplete(event) {
-  let input = event.target.value.replace(/\s/g, ''); // Remove espaços do input
-  let result = '';
-
-  // Divide o input em partes separadas por vírgulas
-  let cores = input.split(',').filter(Boolean); // Filtra valores vazios
-
-  cores.forEach((cor, index) => {
-    // Remove qualquer '#' existente e limita a 6 caracteres
-    cor = cor.replace(/#/g, '').substring(0, 6);
-
-    // Adiciona '#' antes da cor e a formata para 6 dígitos
-    if (cor.length === 6) {
-      result += `#${cor}`;
-      if (index < cores.length - 1) {
-        result += ', '; // Adiciona vírgula e espaço entre as cores
-      }
-    }
-  });
-
-  event.target.value = result; // Atualiza o valor do input
-}
-
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const mensagem = document.getElementById("mensagem");
