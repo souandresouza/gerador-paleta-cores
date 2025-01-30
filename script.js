@@ -65,6 +65,17 @@ function gerarPaleta() {
     }
   });
 
+  // Adiciona bordas aos quadrados coloridos no canvas
+  ctx.strokeStyle = "#000"; // Cor da borda
+  ctx.lineWidth = 2; // Largura da borda
+  cores.forEach((cor, index) => {
+    if (!coresInvalidas.includes(cor)) {
+      const col = index % Math.ceil(Math.sqrt(numCores));
+      const row = Math.floor(index / Math.ceil(Math.sqrt(numCores)));
+      ctx.strokeRect(col * tamanhoQuadrado, row * tamanhoQuadrado, tamanhoQuadrado, tamanhoQuadrado);
+    }
+  });
+
   // Exibe mensagem de sucesso ou erro
   if (coresInvalidas.length > 0) {
     mensagem.textContent = `Cores inválidas: ${coresInvalidas.join(", ")}. Use o formato #RRGGBB.`;
