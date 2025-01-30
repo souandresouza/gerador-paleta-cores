@@ -1,3 +1,19 @@
+document.getElementById("color-input").addEventListener("input", autoComplete);
+
+function autoComplete(event) {
+  const input = event.target.value;
+  const partes = input.split(",");
+  const atualizado = partes.map((parte) => {
+    parte = parte.trim();
+    if (parte && !parte.startsWith("#")) {
+      parte = "#" + parte;
+    }
+    return parte;
+  }).join(", ");
+
+  event.target.value = atualizado;
+}
+
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 const mensagem = document.getElementById("mensagem");
