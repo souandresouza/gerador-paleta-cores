@@ -2,14 +2,25 @@ document.getElementById("color-input").addEventListener("input", autoComplete);
 
 function autoComplete(event) {
   let input = event.target.value.replace(/\s/g, ''); // Remove espaços do input
-  let partes = input.split("#").filter(Boolean); // Divide a string por '#' e remove entradas vazias
-  partes = partes.map(parte => {
-    if (parte.length === 6 && !parte.startsWith("#")) {
-      return "#" + parte;
+  let result = '';
+
+  // Adiciona '#' antes dos códigos que não possuem e adiciona ', ' após cada código válido
+  for (let i = 0; i < input.length; i++) {
+    if (input[i] === ',') continue;
+
+    if (input[i] !== '#') {
+      result += '#';
     }
-    return parte;
-  });
-  event.target.value = partes.join(", ");
+
+    result += input.slice(i, i + 6);
+    i += 5; // Salta os próximos 5 caracteres já adicionados
+
+    if (i < input.length - 1) {
+      result += ', ';
+    }
+  }
+
+  event.target.value = result;
 }
 
 const canvas = document.getElementById("canvas");
