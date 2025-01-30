@@ -4,23 +4,23 @@ function autoComplete(event) {
   let input = event.target.value.replace(/\s/g, ''); // Remove espaços do input
   let result = '';
 
-  // Adiciona '#' antes dos códigos que não possuem e adiciona ', ' após cada código válido
-  for (let i = 0; i < input.length; i++) {
-    if (input[i] === ',') continue;
+  // Divide o input em partes separadas por vírgulas
+  let cores = input.split(',').filter(Boolean); // Filtra valores vazios
 
-    if (input[i] !== '#') {
-      result += '#';
+  cores.forEach((cor, index) => {
+    // Remove qualquer '#' existente e limita a 6 caracteres
+    cor = cor.replace(/#/g, '').substring(0, 6);
+
+    // Adiciona '#' antes da cor e a formata para 6 dígitos
+    if (cor.length === 6) {
+      result += `#${cor}`;
+      if (index < cores.length - 1) {
+        result += ', '; // Adiciona vírgula entre as cores
+      }
     }
+  });
 
-    result += input.slice(i, i + 6);
-    i += 5; // Salta os próximos 5 caracteres já adicionados
-
-    if (i < input.length - 1) {
-      result += ', ';
-    }
-  }
-
-  event.target.value = result;
+  event.target.value = result; // Atualiza o valor do input
 }
 
 const canvas = document.getElementById("canvas");
@@ -104,5 +104,5 @@ function baixarImagem() {
 
 function isValidHexColor(cor) {
   // Valida se a cor é um hexadecimal válido
-  return /^#([0-9A-F]{3}){1,2}$/i.test(cor);
+  return /^#([0-9A-F]{6})$/i.test(cor);
 }
