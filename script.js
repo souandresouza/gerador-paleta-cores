@@ -2,10 +2,10 @@ document.getElementById("color-input").addEventListener("input", autoComplete);
 
 function autoComplete(event) {
   let input = event.target.value.replace(/\s/g, ''); // Remove espaços do input
-  let partes = input.match(/.{1,6}/g); // Divide o input a cada 6 caracteres
+  let partes = input.split("#").filter(Boolean); // Divide a string por '#' e remove entradas vazias
   partes = partes.map(parte => {
     if (parte.length === 6 && !parte.startsWith("#")) {
-      parte = "#" + parte;
+      return "#" + parte;
     }
     return parte;
   });
