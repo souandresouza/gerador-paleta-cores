@@ -1,19 +1,15 @@
 document.getElementById("color-input").addEventListener("input", autoComplete);
 
 function autoComplete(event) {
-  let input = event.target.value;
-  
-  // Adiciona '#' se o usuário começar a digitar sem ele
-  if (input.length === 1 && input !== "#") {
-    input = "#" + input;
-  }
-
-  // Adiciona vírgula e espaço após cada 7 caracteres (código hex completo)
-  if (input.length > 1 && input.length % 8 === 0) {
-    input += ", ";
-  }
-
-  event.target.value = input;
+  let input = event.target.value.replace(/\s/g, ''); // Remove espaços do input
+  let partes = input.match(/.{1,6}/g); // Divide o input a cada 6 caracteres
+  partes = partes.map(parte => {
+    if (parte.length === 6 && !parte.startsWith("#")) {
+      parte = "#" + parte;
+    }
+    return parte;
+  });
+  event.target.value = partes.join(", ");
 }
 
 const canvas = document.getElementById("canvas");
