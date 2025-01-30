@@ -15,7 +15,7 @@ function autoComplete(event) {
     if (cor.length === 6) {
       result += `#${cor}`;
       if (index < cores.length - 1) {
-        result += ', '; // Adiciona vírgula entre as cores
+        result += ', '; // Adiciona vírgula e espaço entre as cores
       }
     }
   });
@@ -103,6 +103,6 @@ function baixarImagem() {
 }
 
 function isValidHexColor(cor) {
-  // Valida se a cor é um hexadecimal válido
+  // Valida se a cor é um hexadecimal válido (6 dígitos após o #)
   return /^#([0-9A-F]{6})$/i.test(cor);
 }
